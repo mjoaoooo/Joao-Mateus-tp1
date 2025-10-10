@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Interação com API usando htmx</title>
+  <script src="https://unpkg.com/htmx.org@1.9.2"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+    }
+    input[type="text"] {
+      padding: 0.5rem;
+      font-size: 1rem;
+      margin-right: 0.5rem;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    #resposta-post, #resposta-get {
+      margin-top: 1rem;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      background: #f9f9f9;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>Cadastro de Nomes</h1>
+
+ 
+  <form
+    id="form-nome"
+    hx-post="https://ola-tp1.onrender.com/nomes"
+    hx-trigger="submit"
+    hx-target="#resposta-post"
+    hx-swap="innerHTML"
+  >
+    <label for="nome">Digite um nome:</label>
+    <input
+      type="text"
+      id="nome"
+      name="nome"
+      required
+      autocomplete="off"
+      placeholder="Nome"
+    />
+    <button type="submit">Salvar Nome</button>
+  </form>
+
+  
+  <div id="resposta-post" aria-live="polite"></div>
+
+  <hr />
+
+  <button
+    hx-get="https://ola-tp1.onrender.com/nomes"
+    hx-trigger="click"
+    hx-target="#resposta-get"
+    hx-swap="innerHTML"
+  >
+    Listar Nomes Cadastrados
+  </button>
+
+  
+  <div id="resposta-get" aria-live="polite"></div>
+</body>
+</html>
